@@ -59,42 +59,42 @@ llmultiply:
 
 	MOV EAX, [EBP + AL_OFF] 
 	MOV EDX, [EBP + BL_OFF]
-	MUL EDX ; al * bl   EAX = al*bl
+	MUL EDX ; al * bl   EAX = low EDX = high
 
-	MOV EDX, EAX  
-	MOV ECX, EAX
+	MOV EDI, EAX  
+	MOV ECX, EDX
 
 	MOV EAX, [EBP + AL_OFF]
-	MOV EDI, [EBP + BH_OFF]
-	MUL EDI ; al * bh
+	MOV EDX, [EBP + BH_OFF]
+	MUL EDX ; al * bh
 
 	ADD ECX, EAX
 	ADC EBX, ECX
-	ADD EBX, EAX
+	ADD EBX, EDX
 	ADC ESI, EBX 
 
 	MOV EAX, [EBP + AH_OFF]
-	MOV EDI, [EBP + BL_OFF]
-	MUL EDI ; ah * bl
+	MOV EDX, [EBP + BL_OFF]
+	MUL EDX ; ah * bl
 
 	ADD ECX, EAX
 	ADC EBX, ECX
-	ADD EBX, EAX
+	ADD EBX, EDX
 	ADC ESI, EBX
 
 	MOV EAX, [EBP + AH_OFF]
-	MOV EDI, [EBP + BH_OFF]
-	MUL EDI ; ah * bh
+	MOV EDX, [EBP + BH_OFF]
+	MUL EDX ; ah * bh
 
 	ADD EBX, EAX
 	ADC ESI, EBX
-	ADD ESI, EAX
+	ADD ESI, EDX
 
-	MOV EDI, [EBP + RES_OFF]
-	MOV [EDI], EDX
-	MOV [EDI + 4], ECX
-	MOV [EDI + 8], EBX
-	MOV [EDI + 12], ESI
+	MOV EAX, [EBP + RES_OFF]
+	MOV [EAX], EDI
+	MOV [EAX + 4], ECX
+	MOV [EAX + 8], EBX
+	MOV [EAX + 12], ESI
 
 	POP EAX 
 	POP EBX 
