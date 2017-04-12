@@ -57,6 +57,11 @@ llmultiply:
 	PUSH EDI
 	PUSH ESI
 
+	MOV EDI, 0
+	MOV ECX, 0
+	MOV EBX, 0
+	MOV ESI, 0
+
 	MOV EAX, [EBP + AL_OFF] 
 	MOV EDX, [EBP + BL_OFF]
 	MUL EDX ; al * bl   EAX = low EDX = high
@@ -69,26 +74,23 @@ llmultiply:
 	MUL EDX ; al * bh
 
 	ADD ECX, EAX
-	ADC EBX, ECX
-	ADD EBX, EDX
-	ADC ESI, EBX 
+	ADC EBX, EDX
+	ADC ESI, 0
 
 	MOV EAX, [EBP + AH_OFF]
 	MOV EDX, [EBP + BL_OFF]
 	MUL EDX ; ah * bl
-
+	
 	ADD ECX, EAX
-	ADC EBX, ECX
-	ADD EBX, EDX
-	ADC ESI, EBX
+	ADC EBX, EDX
+	ADC ESI, 0
 
 	MOV EAX, [EBP + AH_OFF]
 	MOV EDX, [EBP + BH_OFF]
 	MUL EDX ; ah * bh
 
 	ADD EBX, EAX
-	ADC ESI, EBX
-	ADD ESI, EDX
+	ADC ESI, EDX
 
 	MOV EAX, [EBP + RES_OFF]
 	MOV [EAX], EDI
