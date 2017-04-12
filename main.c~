@@ -47,10 +47,10 @@ void llmultiply2(unsigned long long int l1, unsigned long long int l2, unsigned 
 {
  unsigned long long int res;
  result = l1*l2;
- result = (l1*l2)/(2^8);
+ //result = (l1*l2)/(2^8);
  //result = *res;
  PutUnsignedLongLong(&result+8);
- PutUnsignedLongLong(&result);
+ PutUnsignedLongLong(&((l1*l2)/(2^8)));
 }
 
 int main(int argc, char *argv[])
