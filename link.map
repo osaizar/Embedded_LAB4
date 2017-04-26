@@ -160,8 +160,8 @@ OUTPUT(embedded.bin binary)
 .debug_line     0x0000000000000000       0xc3
  .debug_line    0x0000000000000000       0xc3 main.o
 
-.debug_str      0x0000000000000000      0x123
- .debug_str     0x0000000000000000      0x123 main.o
+.debug_str      0x0000000000000000      0x134
+ .debug_str     0x0000000000000000      0x134 main.o
 
 .comment        0x0000000000000000       0x12
  .comment       0x0000000000000000       0x12 main.o
