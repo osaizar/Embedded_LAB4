@@ -97,6 +97,7 @@ void llmultiply2(unsigned long long int l1, unsigned long long int l2, unsigned 
 int main(int argc, char *argv[])
 {
   unsigned char result[16];
+  unsigned int stopTime = 0;
   int i;
 
   ClearScreen(0x07);
@@ -128,19 +129,32 @@ int main(int argc, char *argv[])
   // test assembly
   PutString("Testing assembly for 1000000 iterations:");
   PutString("\r\n");
+  stopTime = Milliseconds();
   for (i = 0; i < 1000000; i++){
     llmultiply(cases[0].a+i, cases[0].b, result);
   }
+  stopTime = Milliseconds() - stopTime;
   PutString("Time: ");
+  PutUnsigned(stopTime, 10, 8);
   PutString("\r\n");
 
   // test c
   PutString("Testing C for 1000000 iterations:");
   PutString("\r\n");
+  stopTime = Milliseconds();
   for (i = 0; i < 1000000; i++){
-    llmultiply2(cases[0].a+i, cases[0].b, result);
+    llmultiply2(result[8], result[0], result);
   }
+
+  stopTime = Milliseconds() - stopTime;
+
+  PutString("Result ");
+  PutUnsignedLongLong(&result[8]);
+  PutUnsignedLongLong(&result[0]);
+  PutString("\r\n");
+
   PutString("Time: ");
+  PutUnsigned(stopTime, 10, 8);
   PutString("\r\n");
 
   return 0;
